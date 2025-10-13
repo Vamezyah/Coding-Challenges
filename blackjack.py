@@ -1,10 +1,22 @@
 import random
 import os
-import math
+
+logo = """
+ $$$$$$\    $$\         $$$$$$$\  $$\        $$$$$$\   $$$$$$\  $$\   $$\   $$$$$\  $$$$$$\   $$$$$$\  $$\   $$\ 
+$$  __$$\ $$$$ |        $$  __$$\ $$ |      $$  __$$\ $$  __$$\ $$ | $$  |  \__$$ |$$  __$$\ $$  __$$\ $$ | $$  |
+\__/  $$ |\_$$ |        $$ |  $$ |$$ |      $$ /  $$ |$$ /  \__|$$ |$$  /      $$ |$$ /  $$ |$$ /  \__|$$ |$$  / 
+ $$$$$$  |  $$ |        $$$$$$$\ |$$ |      $$$$$$$$ |$$ |      $$$$$  /       $$ |$$$$$$$$ |$$ |      $$$$$  /  
+$$  ____/   $$ |        $$  __$$\ $$ |      $$  __$$ |$$ |      $$  $$<  $$\   $$ |$$  __$$ |$$ |      $$  $$<   
+$$ |        $$ |        $$ |  $$ |$$ |      $$ |  $$ |$$ |  $$\ $$ |\$$\ $$ |  $$ |$$ |  $$ |$$ |  $$\ $$ |\$$\  
+$$$$$$$$\ $$$$$$\       $$$$$$$  |$$$$$$$$\ $$ |  $$ |\$$$$$$  |$$ | \$$\\$$$$$$  |$$ |  $$ |\$$$$$$  |$$ | \$$\ 
+\________|\______|      \_______/ \________|\__|  \__| \______/ \__|  \__|\______/ \__|  \__| \______/ \__|  \__|
+                                                                                                                 
+"""
 cards = [11,2,3,4,5,6,7,8,9,10,10,10,10] #In blackjack there are plenty of decks so the cards can repeat (there are 4 10's because of the cards 10,J,Q and K)
 player_cards = []
 dealer_cards = []
 flag = 0
+print(logo)
 
 # Deal of cards
 
@@ -104,12 +116,13 @@ while (sum(dealer_cards) < 21 and flag == 0):
     if(sum(dealer_cards) < 18):
         dealer_cards.append(random.choice(cards))
         print("Dealer decided to hit")
+        if(dealer_cards[-1] == 11) and (sum(dealer_cards) > 21):
+            dealer_cards[-1] = 1
     else:
         print("Dealer decided to stand")
         break
 
 #Final result
-print("\nFINAL RESULTS")
 if(sum(player_cards) == 21 and flag == 0):
         if(sum(dealer_cards) == 21):
             print("It's a tie!!!")
@@ -135,6 +148,10 @@ if ((abs(sum(player_cards)-21) <= abs(sum(dealer_cards)-21) and flag == 0) or (s
         print(f'Your cards: {player_cards} sum: {sum(player_cards)}')
         print(f'Dealer cards: {dealer_cards} sum: {sum(dealer_cards)}')
 
+elif (sum(dealer_cards)>21 and flag == 0):
+    print("You win!!!")
+    print(f'Your cards: {player_cards} sum: {sum(player_cards)}')
+    print(f'Dealer cards: {dealer_cards} sum: {sum(dealer_cards)}')
 
 elif ((abs(sum(player_cards)-21) > abs(sum(dealer_cards)-21) and flag == 0) or (sum(dealer_cards) == 21 and flag == 0) and sum(player_cards) != 21 and flag == 0):
     print("You lose!!!")

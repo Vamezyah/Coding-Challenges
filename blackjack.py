@@ -107,7 +107,7 @@ while (sum(player_cards) < 21 and flag == 0):
     if(sum(player_cards) == 21):
         os.system('cls')
         print(f'Your cards: {player_cards} sum: {sum(player_cards)}')
-        print("You reach 21, let's wait the dealer")
+        print("You reached 21, let's wait the dealer")
         print("\nDealer's turn")
 
 # Dealers turn
